@@ -151,9 +151,6 @@ footer{
         <input type="text" id="rt" placeholder="RT / RW" required
         style="width:300px;padding:10px;margin:10px;"><br>
 
-        <input type="text" id="kodepos" placeholder="Kode Pos" required
-        style="width:300px;padding:10px;margin:10px;"><br>
-
         <textarea id="detailAlamat"
         placeholder="Patokan Rumah / Detail Alamat"
         required
@@ -501,7 +498,6 @@ function kirimWA(event){
     let kecamatan = document.getElementById("kecamatan").value;
     let desa = document.getElementById("desa").value;
     let rt = document.getElementById("rt").value;
-    let kodepos = document.getElementById("kodepos").value;
     let detailAlamat = document.getElementById("detailAlamat").value;
     let daftarProduk = "";
     keranjang.forEach((item,index)=>{
@@ -531,7 +527,6 @@ Kab/Kota : ${kabupaten}
 Kecamatan : ${kecamatan}
 Desa : ${desa}
 RT/RW : ${rt}
-Kode Pos : ${kodepos}
 Detail Alamat :
 ${detailAlamat}`;
     let nomorAdmin = "628811466432";
