@@ -154,6 +154,107 @@ footer{
     padding:15px;
     margin-top:40px;
 }
+#keranjang{
+    max-width:700px;
+    margin:auto;
+}
+
+.item-keranjang{
+    background:white;
+    padding:15px 20px;
+    margin:15px 0;
+    border-radius:15px;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    box-shadow:0 3px 10px rgba(0,0,0,0.1);
+}
+
+.item-keranjang h3{
+    color:#007bff;
+    margin-bottom:5px;
+}
+
+.item-keranjang p{
+    color:#555;
+}
+
+.hapus-btn{
+    border:none;
+    background:red;
+    color:white;
+    width:40px;
+    height:40px;
+    border-radius:50%;
+    cursor:pointer;
+    font-size:18px;
+}
+
+.hapus-btn:hover{
+    transform:scale(1.1);
+}
+
+#totalHarga{
+    margin-top:20px;
+    color:#007bff;
+    font-size:24px;
+}
+
+#keranjang .btn{
+    background:#28a745;
+    color:white;
+    margin-top:20px;
+}
+.cart-icon{
+    display:none;
+
+    position:fixed;
+    bottom:25px;
+    right:25px;
+
+    width:65px;
+    height:65px;
+
+    border:none;
+    border-radius:50%;
+
+    background:#007bff;
+    color:white;
+
+    font-size:28px;
+    cursor:pointer;
+
+    box-shadow:0 5px 15px rgba(0,0,0,.3);
+
+    z-index:9999;
+
+    transition:.3s;
+}
+
+.cart-icon:hover{
+    transform:scale(1.1);
+}
+
+.cart-icon span{
+    position:absolute;
+    top:-5px;
+    right:-5px;
+
+    width:24px;
+    height:24px;
+
+    border-radius:50%;
+
+    background:red;
+    color:white;
+
+    font-size:12px;
+    font-weight:bold;
+
+    display:flex;
+    justify-content:center;
+    align-items:center;
+}
 </style>
 </head>
 <body>
@@ -231,10 +332,13 @@ style="width:300px;padding:10px;margin:10px;">
 
     <a onclick="showHome()">Beranda</a>
     <a onclick="showProduk()">Produk</a>
-    <a onclick="bukaKeranjang()">Keranjang</a>
     <a onclick="showKontak()">Kontak</a>
 
 </nav>
+<button class="cart-icon" onclick="bukaKeranjang()">
+    🛒
+    <span id="jumlahKeranjang">0</span>
+</button>
 <section class="hero" id="home">
 
 <h1>Selamat Datang</h1>
@@ -403,14 +507,18 @@ function showHome(){
     document.getElementById("kontak").style.display="none";
     document.getElementById("checkout").style.display="none";
     document.getElementById("keranjang").style.display="none";
+    document.querySelector(".cart-icon").style.display="none";
 }
 
 function showProduk(){
+
     document.getElementById("home").style.display="none";
     document.getElementById("produk").style.display="block";
     document.getElementById("kontak").style.display="none";
     document.getElementById("checkout").style.display="none";
     document.getElementById("keranjang").style.display="none";
+
+    document.querySelector(".cart-icon").style.display="block";
 }
 
 
@@ -420,6 +528,7 @@ function showKontak(){
     document.getElementById("kontak").style.display="block";
     document.getElementById("checkout").style.display="none";
     document.getElementById("keranjang").style.display="none";
+    document.querySelector(".cart-icon").style.display="none";
 }
 
 function checkout(namaProduk){
@@ -432,13 +541,16 @@ function checkout(namaProduk){
     document.getElementById("produkDipilih").value = namaProduk;
 }
 function tambahKeranjang(nama,harga){
-
+   
     keranjang.push({
         nama:nama,
         harga:harga
     });
 
     alert(nama + " ditambahkan ke keranjang");
+     document.getElementById("jumlahKeranjang").innerHTML =
+keranjang.length;
+
 }
 
 function bukaKeranjang(){
@@ -462,15 +574,19 @@ function tampilkanKeranjang(){
     keranjang.forEach((item,index)=>{
 
         html += `
-        <p>
-        ${index+1}. ${item.nama}
-        - Rp${item.harga.toLocaleString()}
+        <div class="item-keranjang">
 
-        <button onclick="hapusItem(${index})">
-        ❌
-        </button>
+            <div>
+                <h3>${item.nama}</h3>
+                <p>Rp${item.harga.toLocaleString()}</p>
+            </div>
 
-        </p>
+            <button class="hapus-btn"
+            onclick="hapusItem(${index})">
+            ❌
+            </button>
+
+        </div>
         `;
 
         totalHarga += item.harga;
@@ -483,10 +599,13 @@ function tampilkanKeranjang(){
 }
 
 function hapusItem(index){
-
+    
     keranjang.splice(index,1);
 
     tampilkanKeranjang();
+    document.getElementById("jumlahKeranjang").innerHTML =
+keranjang.length;
+
 }
 
 function lanjutCheckout(){
