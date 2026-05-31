@@ -31,11 +31,36 @@ nav{
 }
 
 nav a{
-    color:white;
+    color:rgb(252, 252, 252);
     text-decoration:none;
-    margin:0 15px;
+    margin:0 10px;
     cursor:pointer;
     font-weight:bold;
+
+    border:2px solid rgb(255, 255, 255);
+    padding:8px 18px;
+    border-radius:25px;
+
+    transition:0.3s;
+}
+
+nav a:hover{
+    background:rgb(111, 157, 243);
+    color:#ffffff;
+    transform:translateY(-2px);
+}
+
+nav a:active{
+    transform:scale(0.95);
+}
+nav{
+    background:#0056b3;
+    padding:15px;
+    text-align:center;
+    position:sticky;
+    top:0;
+    z-index:1000;
+    box-shadow:0 2px 10px rgba(0,0,0,0.2);
 }
 
 .hero{
@@ -60,8 +85,15 @@ nav a{
     border-radius:30px;
     cursor:pointer;
     font-weight:bold;
+    background:#007bff;
+    color:white;
+    transition:0.3s;
 }
 
+.btn:hover{
+    transform:translateY(-3px);
+    box-shadow:0 5px 15px rgba(0,0,0,.2);
+}
 .produk{
     display:none;
     padding:50px 20px;
@@ -78,10 +110,11 @@ nav a{
 .card{
     width:260px;
     background:white;
-    border-radius:12px;
+    border-radius:15px;
     padding:15px;
-    box-shadow:0 2px 10px rgba(0,0,0,0.1);
-    transition:.3s;
+    box-shadow:0 5px 15px rgba(0,0,0,0.1);
+    transition:0.3s;
+    overflow:hidden;
 }
 
 .card:hover{
@@ -151,6 +184,9 @@ footer{
         <input type="text" id="rt" placeholder="RT / RW" required
         style="width:300px;padding:10px;margin:10px;"><br>
 
+        <input type="text" id="kodepos" placeholder="Kode Pos" required
+        style="width:300px;padding:10px;margin:10px;"><br>
+
         <textarea id="detailAlamat"
         placeholder="Patokan Rumah / Detail Alamat"
         required
@@ -192,16 +228,13 @@ style="width:300px;padding:10px;margin:10px;">
 </header>
 
 <nav>
-    
+
     <a onclick="showHome()">Beranda</a>
     <a onclick="showProduk()">Produk</a>
+    <a onclick="bukaKeranjang()">Keranjang</a>
     <a onclick="showKontak()">Kontak</a>
+
 </nav>
-    <div style="text-align:center;padding:15px;">
-    <button class="btn" onclick="bukaKeranjang()">
-    🛒 Keranjang
-    </button>
-    </div>
 <section class="hero" id="home">
 
 <h1>Selamat Datang</h1>
@@ -218,13 +251,13 @@ style="width:300px;padding:10px;margin:10px;">
 
 <div class="container">
 
-    <img src="testi1.jpg"
+    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRJQ7Ef5INcDFxyFZSvhLqqGSm-g0mkGJrnIw&s"
     style="width:250px;border-radius:15px;margin:10px;">
 
-    <img src="testi2.jpg"
+    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRmQqkVBr9c4Bqm-ZSqEewu92BGkRVudpG2lg&s"
     style="width:250px;border-radius:15px;margin:10px;">
 
-    <img src="testi3.jpg"
+    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ065SE_yY-FUU3CpUSLfvRSVFNY7oBW-SlXQ&s"
     style="width:250px;border-radius:15px;margin:10px;">
 
 </div>
@@ -232,8 +265,10 @@ style="width:300px;padding:10px;margin:10px;">
 </section>
 
 <section class="produk" id="produk">
-
-<h3>Produk Kami</h3>
+    
+<h3 style="position:relative; top:-8px;">
+PRODUK KAMI
+</h3>
 
 <div class="container">
 
@@ -279,7 +314,7 @@ style="width:300px;padding:10px;margin:10px;">
 
     <div class="card">
         <img src="wash.jpg">
-        <h3>FAE WASH</h3>
+        <h3>FACE WASH</h3>
         <p>Deskripsi produk</p>
         <div class="harga">Rp.35.000</div>
 
@@ -362,21 +397,29 @@ Checkout
 let keranjang = [];
 let totalHarga = 0;
 function showHome(){
+
     document.getElementById("home").style.display="block";
     document.getElementById("produk").style.display="none";
     document.getElementById("kontak").style.display="none";
+    document.getElementById("checkout").style.display="none";
+    document.getElementById("keranjang").style.display="none";
 }
 
 function showProduk(){
     document.getElementById("home").style.display="none";
     document.getElementById("produk").style.display="block";
     document.getElementById("kontak").style.display="none";
+    document.getElementById("checkout").style.display="none";
+    document.getElementById("keranjang").style.display="none";
 }
 
+
 function showKontak(){
-    document.getElementById("home").style.display="none";
+   document.getElementById("home").style.display="none";
     document.getElementById("produk").style.display="none";
     document.getElementById("kontak").style.display="block";
+    document.getElementById("checkout").style.display="none";
+    document.getElementById("keranjang").style.display="none";
 }
 
 function checkout(namaProduk){
@@ -498,6 +541,7 @@ function kirimWA(event){
     let kecamatan = document.getElementById("kecamatan").value;
     let desa = document.getElementById("desa").value;
     let rt = document.getElementById("rt").value;
+    let kodepos = document.getElementById("kodepos").value;
     let detailAlamat = document.getElementById("detailAlamat").value;
     let daftarProduk = "";
     keranjang.forEach((item,index)=>{
@@ -527,6 +571,7 @@ Kab/Kota : ${kabupaten}
 Kecamatan : ${kecamatan}
 Desa : ${desa}
 RT/RW : ${rt}
+Kode Pos : ${kodepos}
 Detail Alamat :
 ${detailAlamat}`;
     let nomorAdmin = "628811466432";
