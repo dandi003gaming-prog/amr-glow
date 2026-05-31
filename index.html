@@ -136,12 +136,6 @@ footer{
         <input type="text" id="hp" placeholder="Nomor WhatsApp" required
         style="width:300px;padding:10px;margin:10px;"><br>
 
-        <input type="text" id="namaPenerima" placeholder="Nama Penerima" required
-        style="width:300px;padding:10px;margin:10px;"><br>
-
-        <input type="text" id="hpPenerima"placeholder="Nomor WhatsApp Penerima" required
-        style="width:300px;padding:10px;margin:10px;"><br>
-
         <input type="text" id="provinsi" placeholder="Provinsi" required
         style="width:300px;padding:10px;margin:10px;"><br>
 
@@ -164,9 +158,6 @@ footer{
         placeholder="Patokan Rumah / Detail Alamat"
         required
         style="width:300px;height:80px;padding:10px;margin:10px;"></textarea><br><br>
-
-        <input type="number" id="jumlah" placeholder="Jumlah Pesanan" required
-        style="width:300px;padding:10px;margin:10px;"><br>
 
         <input type="hidden" id="produkDipilih">
         <select id="pembayaran"
@@ -241,7 +232,6 @@ style="width:300px;padding:10px;margin:10px;">
 
 </div>
 
-</section>
 </section>
 
 <section class="produk" id="produk">
@@ -461,6 +451,13 @@ function hapusItem(index){
 
 function lanjutCheckout(){
 
+    if(keranjang.length == 0){
+
+        alert("Keranjang masih kosong!");
+
+        return;
+    }
+
     document.getElementById("keranjang").style.display="none";
 
     document.getElementById("checkout").style.display="block";
@@ -496,12 +493,9 @@ function lanjutCheckout(){
 function kirimWA(event){
 
     event.preventDefault();
-    let keranjang = [];
-    let totalHarga = 0;
 
     let nama = document.getElementById("nama").value;
     let hp = document.getElementById("hp").value;
-    let namaPenerima = document.getElementById("namaPenerima").value;
     let provinsi = document.getElementById("provinsi").value;
     let kabupaten = document.getElementById("kabupaten").value;
     let kecamatan = document.getElementById("kecamatan").value;
@@ -509,7 +503,6 @@ function kirimWA(event){
     let rt = document.getElementById("rt").value;
     let kodepos = document.getElementById("kodepos").value;
     let detailAlamat = document.getElementById("detailAlamat").value;
-    let jumlah = document.getElementById("jumlah").value;
     let daftarProduk = "";
     keranjang.forEach((item,index)=>{
 
@@ -523,10 +516,8 @@ function kirimWA(event){
 
     let pesan =
 `Halo Admin AMR GLOW
-
 Nama Pemesan : ${nama}
 No HP : ${hp}
-
 === PRODUK ===
 
 ${daftarProduk}
@@ -534,8 +525,6 @@ ${daftarProduk}
 Total Harga :
 Rp${totalHarga.toLocaleString()}
 === DATA PENERIMA ===
-
-Nama Penerima : ${namaPenerima}
 
 Provinsi : ${provinsi}
 Kab/Kota : ${kabupaten}
