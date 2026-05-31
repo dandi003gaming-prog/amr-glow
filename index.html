@@ -1,0 +1,354 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AMR GLOW SKINCARE</title>
+
+<style>
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:Arial, sans-serif;
+}
+
+body{
+    background:#f5f9ff;
+}
+
+header{
+    background:#007bff;
+    color:white;
+    text-align:center;
+    padding:20px;
+}
+
+nav{
+    background:#0056b3;
+    padding:15px;
+    text-align:center;
+}
+
+nav a{
+    color:white;
+    text-decoration:none;
+    margin:0 15px;
+    cursor:pointer;
+    font-weight:bold;
+}
+
+.hero{
+    text-align:center;
+    color:white;
+    padding:120px 20px;
+
+    /* GANTI FOTO BANNER */
+    background:
+    linear-gradient(rgba(0,123,255,0.6),rgba(0,123,255,0.6)),
+    url("paket.jpg");
+
+    background-size:cover;
+    background-position:center;
+}
+
+.btn{
+    display:inline-block;
+    margin-top:20px;
+    padding:12px 25px;
+    border:none;
+    border-radius:30px;
+    cursor:pointer;
+    font-weight:bold;
+}
+
+.produk{
+    display:none;
+    padding:50px 20px;
+    text-align:center;
+}
+
+.container{
+    display:flex;
+    justify-content:center;
+    flex-wrap:wrap;
+    gap:20px;
+}
+
+.card{
+    width:260px;
+    background:white;
+    border-radius:12px;
+    padding:15px;
+    box-shadow:0 2px 10px rgba(0,0,0,0.1);
+    transition:.3s;
+}
+
+.card:hover{
+    transform:translateY(-10px);
+}
+
+.card img{
+    width:100%;
+    border-radius:10px;
+}
+
+.harga{
+    color:#007bff;
+    font-weight:bold;
+    margin:10px 0;
+}
+
+.beli{
+    background:#007bff;
+    color:white;
+    border:none;
+    padding:10px 20px;
+    border-radius:20px;
+    cursor:pointer;
+}
+
+.kontak{
+    display:none;
+    padding:50px 20px;
+    text-align:center;
+}
+
+footer{
+    background:#007bff;
+    color:white;
+    text-align:center;
+    padding:15px;
+    margin-top:40px;
+}
+</style>
+</head>
+<section class="checkout" id="checkout" style="display:none; padding:50px 20px; text-align:center;">
+
+    <h2>Checkout Pesanan</h2>
+
+    <form onsubmit="kirimWA(event)">
+        <input type="text" id="nama" placeholder="Nama Lengkap" required
+        style="width:300px;padding:10px;margin:10px;"><br>
+
+        <input type="text" id="hp" placeholder="Nomor WhatsApp" required
+        style="width:300px;padding:10px;margin:10px;"><br>
+
+        <textarea id="alamat" placeholder="Alamat Lengkap" required
+        style="width:300px;height:100px;padding:10px;margin:10px;"></textarea><br>
+
+        <input type="number" id="jumlah" placeholder="Jumlah Pesanan" required
+        style="width:300px;padding:10px;margin:10px;"><br>
+
+        <input type="hidden" id="produkDipilih">
+
+        <button type="submit" class="beli">
+            Kirim Pesanan
+        </button>
+    </form>
+
+</section>
+<body>
+
+<header>
+    <img src="logoamr.jpg" width="120">
+
+    <!-- AMR GLOW SKINCCARE -->
+    <h1>AMR GLOW SKINCARE</h1>
+
+    <!--  -->
+    <p>SOLUSI GOOD LOOKING AND GOOD REKENING</p>
+
+</header>
+
+<nav>
+    <a onclick="showHome()">Beranda</a>
+    <a onclick="showProduk()">Produk</a>
+    <a onclick="showKontak()">Kontak</a>
+</nav>
+
+<section class="hero" id="home">
+
+    <!-- GANTI JUDUL -->
+    <h1>Selamat Datang</h1>
+
+    <!-- GANTI DESKRIPSI -->
+    <p>Deskripsi singkat tokomu</p>
+
+    <button class="btn" onclick="showProduk()">
+        Lihat Produk
+    </button>
+
+</section>
+
+<section class="produk" id="produk">
+
+<h3>Produk Kami</h3>
+
+<div class="container">
+
+    <!-- PRODUK 1 -->
+    <div class="card">
+        <img src="serum.jpg">
+        <h3>Nama Produk 1</h3>
+        <p>Deskripsi produk</p>
+        <div class="harga">Rp75.000</div>
+
+        <!-- GANTI NOMOR WA -->
+        <button class="beli" onclick="checkout('SERUM AMR GLOW')">
+            Beli
+        </button>
+    </div>
+
+    <!-- PRODUK 2 -->
+    <div class="card">
+        <img src="sunscreen.jpg">
+        <h3>SUNSREEN AMR GLOW</h3>
+        <p>Melindungi wajah dari teriknya matahari dan mencerahkan wajah</p>
+        <div class="harga">Rp55.000</div>
+
+        <button class="beli" onclick="checkout('SUNSCREEN AMR GLOW')">
+            Beli
+        </button>
+    </div>
+
+    <!-- PRODUK 3 -->
+    <div class="card">
+        <img src="cream.jpg">
+        <h3>Nama Produk 3</h3>
+        <p>Deskripsi produk</p>
+        <div class="harga">Rp50.000</div>
+
+        <button class="beli" onclick="checkout('CREAM AMR GLOW')">
+            Beli
+        </button>
+    </div>
+
+
+    <div class="card">
+        <img src="wash.jpg">
+        <h3>Nama Produk 3</h3>
+        <p>Deskripsi produk</p>
+        <div class="harga">Rp.35.000</div>
+
+        <button class="beli" onclick="checkout('FACE TONER AMR GLOW')">
+            Beli
+        </button>
+    </div>
+
+    <div class="card">
+        <img src="toner.jpg">
+        <h3>Nama Produk 3</h3>
+        <p>Deskripsi produk</p>
+        <div class="harga">Rp50.000</div>
+
+        <button class="beli" onclick="checkout('FACE TONER AMR GLOW')">
+            Beli
+        </button>
+    </div>
+
+    <div class="card">
+        <img src="paket.jpg">
+        <h3>Nama Produk 3</h3>
+        <p>Deskripsi produk</p>
+        <div class="harga">Rp110.000</div>
+
+        <button class="beli" onclick="checkout('SATU PAKET AMR GLOW')">
+            Beli
+        </button>
+    </div>
+
+    <div class="card">
+        <img src="paketkomplit.jpg">
+        <h3>Nama Produk 3</h3>
+        <p>Deskripsi produk</p>
+        <div class="harga">Rp240.000</div>
+
+        <button class="beli" onclick="checkout('PAKET KOMPLIT AMR GLOW')">
+            Beli
+        </button>
+    </div>
+
+</div>
+
+</section>
+
+<section class="kontak" id="kontak">
+
+    <h2>Kontak Kami</h2>
+
+    <!-- GANTI SEMUA -->
+    <p>WhatsApp : 081234567890</p>
+    <p>Email : email@gmail.com</p>
+    <p>Alamat : Alamat Toko</p>
+
+</section>
+
+<footer>
+    © 2026 Nama Toko
+</footer>
+
+<script>
+
+function showHome(){
+    document.getElementById("home").style.display="block";
+    document.getElementById("produk").style.display="none";
+    document.getElementById("kontak").style.display="none";
+}
+
+function showProduk(){
+    document.getElementById("home").style.display="none";
+    document.getElementById("produk").style.display="block";
+    document.getElementById("kontak").style.display="none";
+}
+
+function showKontak(){
+    document.getElementById("home").style.display="none";
+    document.getElementById("produk").style.display="none";
+    document.getElementById("kontak").style.display="block";
+}
+
+function checkout(namaProduk){
+
+    document.getElementById("home").style.display="none";
+    document.getElementById("produk").style.display="none";
+    document.getElementById("kontak").style.display="none";
+    document.getElementById("checkout").style.display="block";
+
+    document.getElementById("produkDipilih").value = namaProduk;
+}
+
+function kirimWA(event){
+
+    event.preventDefault();
+
+    let nama = document.getElementById("nama").value;
+    let hp = document.getElementById("hp").value;
+    let alamat = document.getElementById("alamat").value;
+    let jumlah = document.getElementById("jumlah").value;
+    let produk = document.getElementById("produkDipilih").value;
+
+    let pesan =
+`Halo Admin AMR GLOW
+
+Nama : ${nama}
+No HP : ${hp}
+Produk : ${produk}
+Jumlah : ${jumlah}
+
+Alamat :
+${alamat}`;
+
+    let nomorAdmin = "628811466432";
+
+    window.open(
+        `https://wa.me/${nomorAdmin}?text=${encodeURIComponent(pesan)}`,
+        "_blank"
+    );
+}
+
+</script>
+
+
+</body>
+</html>
