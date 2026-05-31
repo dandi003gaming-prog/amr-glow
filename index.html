@@ -123,9 +123,11 @@ footer{
 }
 </style>
 </head>
-<section class="checkout" id="checkout" style="display:none; padding:50px 20px; text-align:center;">
+<body>
 
+<section class="checkout" id="checkout" style="display:none;padding:50px 20px;text-align:center;">
     <h2>Checkout Pesanan</h2>
+        
 
     <form onsubmit="kirimWA(event)">
         <input type="text" id="nama" placeholder="Nama Lengkap" required
@@ -134,21 +136,54 @@ footer{
         <input type="text" id="hp" placeholder="Nomor WhatsApp" required
         style="width:300px;padding:10px;margin:10px;"><br>
 
-        <textarea id="alamat" placeholder="Alamat Lengkap
-            <textarea id="alamat" placeholder="Alamat Lengkap
-                Penanda :
-                Desa    :
-                Rt/Rw   :
-                Kec     :
-                Kab     :
-                Prov    :
-            " required
-        style="width:300px;height:100px;padding:10px;margin:10px;"></textarea><br>
+        <input type="text" id="namaPenerima" placeholder="Nama Penerima" required
+        style="width:300px;padding:10px;margin:10px;"><br>
+
+        <input type="text" id="hpPenerima"placeholder="Nomor WhatsApp Penerima" required
+        style="width:300px;padding:10px;margin:10px;"><br>
+
+        <input type="text" id="provinsi" placeholder="Provinsi" required
+        style="width:300px;padding:10px;margin:10px;"><br>
+
+        <input type="text" id="kabupaten" placeholder="Kabupaten / Kota" required
+        style="width:300px;padding:10px;margin:10px;"><br>
+
+        <input type="text" id="kecamatan" placeholder="Kecamatan" required
+        style="width:300px;padding:10px;margin:10px;"><br>
+
+        <input type="text" id="desa" placeholder="Desa / Kelurahan" required
+        style="width:300px;padding:10px;margin:10px;"><br>
+
+        <input type="text" id="rt" placeholder="RT / RW" required
+        style="width:300px;padding:10px;margin:10px;"><br>
+
+        <input type="text" id="kodepos" placeholder="Kode Pos" required
+        style="width:300px;padding:10px;margin:10px;"><br>
+
+        <textarea id="detailAlamat"
+        placeholder="Patokan Rumah / Detail Alamat"
+        required
+        style="width:300px;height:80px;padding:10px;margin:10px;"></textarea><br><br>
 
         <input type="number" id="jumlah" placeholder="Jumlah Pesanan" required
         style="width:300px;padding:10px;margin:10px;"><br>
 
         <input type="hidden" id="produkDipilih">
+        <select id="pembayaran"
+required
+style="width:300px;padding:10px;margin:10px;">
+
+<option value="">Pilih Pembayaran</option>
+
+<option>Transfer BRI</option>
+<option>Transfer BCA</option>
+<option>Dana</option>
+<option>QRIS</option>
+<option>COD</option>
+
+</select>
+
+<div id="infoBayar"></div>
 
         <button type="submit" class="beli">
             Kirim Pesanan
@@ -156,7 +191,6 @@ footer{
     </form>
 
 </section>
-<body>
 
 <header>
     <img src="logoamr.jpg" width="120">
@@ -170,23 +204,44 @@ footer{
 </header>
 
 <nav>
+    
     <a onclick="showHome()">Beranda</a>
     <a onclick="showProduk()">Produk</a>
     <a onclick="showKontak()">Kontak</a>
 </nav>
-
+    <div style="text-align:center;padding:15px;">
+    <button class="btn" onclick="bukaKeranjang()">
+    🛒 Keranjang
+    </button>
+    </div>
 <section class="hero" id="home">
 
-    <!-- GANTI JUDUL -->
-    <h1>Selamat Datang</h1>
+<h1>Selamat Datang</h1>
 
-    <!-- GANTI DESKRIPSI -->
-    <p>Deskripsi singkat tokomu</p>
+<p>Deskripsi singkat tokomu</p>
 
-    <button class="btn" onclick="showProduk()">
-        Lihat Produk
-    </button>
+<button class="btn" onclick="showProduk()">
+    Lihat Produk
+</button>
 
+<br><br>
+
+<h2>Testimoni Pelanggan</h2>
+
+<div class="container">
+
+    <img src="testi1.jpg"
+    style="width:250px;border-radius:15px;margin:10px;">
+
+    <img src="testi2.jpg"
+    style="width:250px;border-radius:15px;margin:10px;">
+
+    <img src="testi3.jpg"
+    style="width:250px;border-radius:15px;margin:10px;">
+
+</div>
+
+</section>
 </section>
 
 <section class="produk" id="produk">
@@ -198,86 +253,106 @@ footer{
     <!-- PRODUK 1 -->
     <div class="card">
         <img src="serum.jpg">
-        <h3>Nama Produk 1</h3>
+        <h3>SERUM GOLD</h3>
         <p>Deskripsi produk</p>
         <div class="harga">Rp75.000</div>
 
-        <!-- GANTI NOMOR WA -->
-        <button class="beli" onclick="checkout('SERUM AMR GLOW')">
-            Beli
+        <button class="beli"
+        onclick="tambahKeranjang('SERUM GOLD',75000)">
+            Tambah Keranjang
         </button>
     </div>
 
     <!-- PRODUK 2 -->
     <div class="card">
         <img src="sunscreen.jpg">
-        <h3>SUNSREEN AMR GLOW</h3>
+        <h3>SUNCREEN</h3>
         <p>Melindungi wajah dari teriknya matahari dan mencerahkan wajah</p>
         <div class="harga">Rp55.000</div>
 
-        <button class="beli" onclick="checkout('SUNSCREEN AMR GLOW')">
-            Beli
+        <button class="beli"
+        onclick="tambahKeranjang('SUNSCREEN',55000)">
+            Tambah Keranjang
         </button>
     </div>
 
     <!-- PRODUK 3 -->
     <div class="card">
         <img src="cream.jpg">
-        <h3>Nama Produk 3</h3>
+        <h3>CREAM</h3>
         <p>Deskripsi produk</p>
         <div class="harga">Rp50.000</div>
 
-        <button class="beli" onclick="checkout('CREAM AMR GLOW')">
-            Beli
+        <button class="beli"
+        onclick="tambahKeranjang('CREAM',50000)">
+            Tambah Keranjang
         </button>
     </div>
 
 
     <div class="card">
         <img src="wash.jpg">
-        <h3>Nama Produk 3</h3>
+        <h3>FAE WASH</h3>
         <p>Deskripsi produk</p>
         <div class="harga">Rp.35.000</div>
 
-        <button class="beli" onclick="checkout('FACE TONER AMR GLOW')">
-            Beli
+        <button class="beli"
+        onclick="tambahKeranjang('FACE WASH',35000)">
+            Tambah Keranjang
         </button>
     </div>
 
     <div class="card">
         <img src="toner.jpg">
-        <h3>Nama Produk 3</h3>
+        <h3>FACE TONER</h3>
         <p>Deskripsi produk</p>
         <div class="harga">Rp50.000</div>
 
-        <button class="beli" onclick="checkout('FACE TONER AMR GLOW')">
-            Beli
+        <button class="beli"
+        onclick="tambahKeranjang('FACE TONER',50000)">
+            Tambah Keranjang
         </button>
     </div>
 
     <div class="card">
         <img src="paket.jpg">
-        <h3>Nama Produk 3</h3>
+        <h3>PAKETAN AMR</h3>
         <p>Deskripsi produk</p>
         <div class="harga">Rp110.000</div>
 
-        <button class="beli" onclick="checkout('SATU PAKET AMR GLOW')">
-            Beli
+        <button class="beli"
+        onclick="tambahKeranjang('SATU PAKET',110000)">
+            Tambah Keranjang
         </button>
     </div>
 
     <div class="card">
         <img src="paketkomplit.jpg">
-        <h3>Nama Produk 3</h3>
+        <h3>PAKETAN KOMPLIT AMR</h3>
         <p>Deskripsi produk</p>
         <div class="harga">Rp240.000</div>
 
-        <button class="beli" onclick="checkout('PAKET KOMPLIT AMR GLOW')">
-            Beli
+        <button class="beli"
+        onclick="tambahKeranjang('PAKET KOMPLIT',240000)">
+            Tambah Keranjang
         </button>
     </div>
 
 </div>
+
+</section>
+<section id="keranjang"
+style="display:none;padding:40px;text-align:center;">
+
+<h2>Keranjang Belanja</h2>
+
+<div id="daftarKeranjang"></div>
+
+<h3 id="totalHarga">Total: Rp0</h3>
+
+<button class="btn" onclick="lanjutCheckout()">
+Checkout
+</button>
 
 </section>
 
@@ -286,18 +361,19 @@ footer{
     <h2>Kontak Kami</h2>
 
     <!-- GANTI SEMUA -->
-    <p>WhatsApp : 081234567890</p>
-    <p>Email : email@gmail.com</p>
-    <p>Alamat : Alamat Toko</p>
+    <p>WhatsApp : 08811466432</p>
+    <p>Email : AMR GLOW @gmail.com</p>
+    <p>Alamat : Batu Agung</p>
 
 </section>
 
 <footer>
-    © 2026 Nama Toko
+    © 2026 AMR GLOW SKINCARE
 </footer>
 
 <script>
-
+let keranjang = [];
+let totalHarga = 0;
 function showHome(){
     document.getElementById("home").style.display="block";
     document.getElementById("produk").style.display="none";
@@ -325,34 +401,150 @@ function checkout(namaProduk){
 
     document.getElementById("produkDipilih").value = namaProduk;
 }
+function tambahKeranjang(nama,harga){
 
+    keranjang.push({
+        nama:nama,
+        harga:harga
+    });
+
+    alert(nama + " ditambahkan ke keranjang");
+}
+
+function bukaKeranjang(){
+
+    document.getElementById("home").style.display="none";
+    document.getElementById("produk").style.display="none";
+    document.getElementById("kontak").style.display="none";
+    document.getElementById("checkout").style.display="none";
+
+    document.getElementById("keranjang").style.display="block";
+
+    tampilkanKeranjang();
+}
+
+function tampilkanKeranjang(){
+
+    let html = "";
+
+    totalHarga = 0;
+
+    keranjang.forEach((item,index)=>{
+
+        html += `
+        <p>
+        ${index+1}. ${item.nama}
+        - Rp${item.harga.toLocaleString()}
+
+        <button onclick="hapusItem(${index})">
+        ❌
+        </button>
+
+        </p>
+        `;
+
+        totalHarga += item.harga;
+    });
+
+    document.getElementById("daftarKeranjang").innerHTML = html;
+
+    document.getElementById("totalHarga").innerHTML =
+    "Total : Rp" + totalHarga.toLocaleString();
+}
+
+function hapusItem(index){
+
+    keranjang.splice(index,1);
+
+    tampilkanKeranjang();
+}
+
+function lanjutCheckout(){
+
+    document.getElementById("keranjang").style.display="none";
+
+    document.getElementById("checkout").style.display="block";
+}
+    document.getElementById("pembayaran")
+    .addEventListener("change",function(){
+
+    let info="";
+
+    if(this.value=="Transfer BRI"){
+    info="BRI : 1234567890 a.n AMR GLOW";
+    }
+
+    if(this.value=="Transfer BCA"){
+    info="BCA : 1234567890 a.n AMR GLOW";
+    }
+
+    if(this.value=="Dana"){
+    info="Dana : 08123456789";
+    }
+
+    if(this.value=="QRIS"){
+    info="Scan QRIS AMR GLOW";
+    }
+
+    if(this.value=="COD"){
+    info="Bayar di tempat";
+    }
+
+    document.getElementById("infoBayar").innerHTML=info;
+
+    });
 function kirimWA(event){
 
     event.preventDefault();
+    let keranjang = [];
+    let totalHarga = 0;
 
     let nama = document.getElementById("nama").value;
     let hp = document.getElementById("hp").value;
-    let alamat = document.getElementById("alamat").value;
+    let namaPenerima = document.getElementById("namaPenerima").value;
+    let provinsi = document.getElementById("provinsi").value;
+    let kabupaten = document.getElementById("kabupaten").value;
+    let kecamatan = document.getElementById("kecamatan").value;
+    let desa = document.getElementById("desa").value;
+    let rt = document.getElementById("rt").value;
+    let kodepos = document.getElementById("kodepos").value;
+    let detailAlamat = document.getElementById("detailAlamat").value;
     let jumlah = document.getElementById("jumlah").value;
-    let produk = document.getElementById("produkDipilih").value;
+    let daftarProduk = "";
+    keranjang.forEach((item,index)=>{
+
+    daftarProduk +=
+    `${index+1}. ${item.nama}
+    Harga : Rp${item.harga.toLocaleString()}
+
+    `;
+
+    });
 
     let pesan =
 `Halo Admin AMR GLOW
 
-Nama : ${nama}
+Nama Pemesan : ${nama}
 No HP : ${hp}
-Produk : ${produk}
-Jumlah : ${jumlah}
 
-Alamat :
-    Penanda :
-    Desa    :
-    Rt/Rw   :
-    Kec     :
-    Kab     :
-    Prov
-${alamat}`;
+=== PRODUK ===
 
+${daftarProduk}
+
+Total Harga :
+Rp${totalHarga.toLocaleString()}
+=== DATA PENERIMA ===
+
+Nama Penerima : ${namaPenerima}
+
+Provinsi : ${provinsi}
+Kab/Kota : ${kabupaten}
+Kecamatan : ${kecamatan}
+Desa : ${desa}
+RT/RW : ${rt}
+Kode Pos : ${kodepos}
+Detail Alamat :
+${detailAlamat}`;
     let nomorAdmin = "628811466432";
 
     window.open(
@@ -363,9 +555,6 @@ ${alamat}`;
 
 </script>
 
-
-</body>
-</html>
 
 </body>
 </html>
